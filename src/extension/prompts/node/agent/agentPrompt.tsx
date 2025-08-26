@@ -616,17 +616,12 @@ class AgentTasksInstructions extends PromptElement {
 		props: BasePromptElementProps,
 		@ITasksService private readonly _tasksService: ITasksService,
 		@IPromptPathRepresentationService private readonly _promptPathRepresentationService: IPromptPathRepresentationService,
-		@IConfigurationService private readonly _configurationService: IConfigurationService,
 	) {
 		super(props);
 	}
 
 	render() {
 		const taskGroupsRaw = this._tasksService.getTasks();
-		if (!this._configurationService.getConfig(ConfigKey.AgentCanRunTasks)) {
-			return null;
-		}
-
 		const taskGroups = taskGroupsRaw.map(([wf, tasks]) => [wf, tasks.filter(task => (!!task.type || task.dependsOn) && !task.hide)] as const).filter(([, tasks]) => tasks.length > 0);
 		if (taskGroups.length === 0) {
 			return 0;
@@ -641,7 +636,7 @@ class AgentTasksInstructions extends PromptElement {
 						return (
 							<Tag name='task' attrs={{ id: t.type ? `${t.type}: ${t.label || i}` : `${t.label || i}` }}>
 								{this.makeTaskPresentation(t)}
-								{isActive && <> (This task is currently running. You can use the {ToolName.CoreGetTaskOutput} or {ToolName.GetTaskOutput} tool to view its output.)</>}
+								{isActive && <> (This task is currently running. You can use the {ToolName.CoreGetTaskOutput} tool to view its output.)</>}
 							</Tag>
 						);
 					})}

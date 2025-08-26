@@ -42,7 +42,6 @@ export enum ToolName {
 	SimpleBrowser = 'open_simple_browser',
 	CreateDirectory = 'create_directory',
 	RunVscodeCmd = 'run_vscode_command',
-	GetTaskOutput = 'get_task_output',
 	CoreManageTodoList = 'manage_todo_list',
 	CoreRunInTerminal = 'run_in_terminal',
 	CoreGetTerminalOutput = 'get_terminal_output',
@@ -52,6 +51,7 @@ export enum ToolName {
 	CoreRunTask = 'run_task',
 	CoreGetTaskOutput = 'get_task_output',
 	CoreRunTest = 'runTests',
+	ToolReplay = 'tool_replay'
 }
 
 export enum ContributedToolName {
@@ -93,6 +93,7 @@ export enum ContributedToolName {
 	SimpleBrowser = 'copilot_openSimpleBrowser',
 	CreateDirectory = 'copilot_createDirectory',
 	RunVscodeCmd = 'copilot_runVscodeCommand',
+	ToolReplay = 'copilot_toolReplay',
 }
 
 const toolNameToContributedToolNames = new Map<ToolName, ContributedToolName>();
